@@ -1,11 +1,12 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import dotnetLogo from '/dotnet.svg'
-import './App.css'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import dotnetLogo from "./assets/dotnet.svg";
+import typescriptLogo from "./assets/typescript.svg";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
@@ -19,8 +20,11 @@ function App() {
         <a href="https://react.dev" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={typescriptLogo} className="logo" alt="TypeScript logo" />
+        </a>
       </div>
-      <h1>Vite + ASP.NET + React</h1>
+      <h1>Vite + ASP.NET + React + Typescript</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -33,7 +37,7 @@ function App() {
         Click on the Vite, ASP.NET and React logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
