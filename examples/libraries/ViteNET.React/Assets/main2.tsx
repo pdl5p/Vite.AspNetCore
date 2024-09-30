@@ -6,7 +6,7 @@
 import 'vite/modulepreload-polyfill';
 import { createRoot } from "react-dom/client";
 import './index.css';
-import App from "./App";
+import App from "./App2";
 
 const appElement = document.querySelector<HTMLDivElement>('#app')!;
 const root = createRoot(appElement);

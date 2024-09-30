@@ -63,7 +63,10 @@ export default defineConfig(async () => {
             outDir: '../wwwroot',
             assetsDir: '',
             rollupOptions: {
-                input: 'Assets/main.tsx',
+                input: {
+                    main: 'Assets/main.tsx',
+                    main2: 'Assets/main2.tsx'
+                },
                 output: {
                     // Save entry files to the appropriate folder
                     entryFileNames: 'js/[name].[hash].js',
