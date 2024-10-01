@@ -15,11 +15,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Assets\SignalRService.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\src\Vite.AspNetCore\Vite.AspNetCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Assets\SignalRService.ts" />
   </ItemGroup>
 
   <!-- Ensure Node environment on Build -->

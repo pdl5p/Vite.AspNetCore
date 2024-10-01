@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSignalR();
 
 // Add the Vite services.
 builder.Services.AddViteServices(options =>
@@ -42,6 +43,8 @@ app.MapGet("/api/one", () =>
     //return new OkResult();
     return "HI";
 });
+
+app.MapHub<MyHub>("/sigr");
 
 
 app.MapGet("/api/context", (HttpContext httpContext) =>

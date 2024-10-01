@@ -1,4 +1,6 @@
 import { useState } from "react";
+import ChatIT from './SigIT';
+
 import viteLogo from "/vite.svg";
 import "./App.css";
 
@@ -31,11 +33,19 @@ function App() {
           <img src={viteLogo} className="logo" alt="Vite logo" />
               </a>
           </div>  
+          <div>
+          <ChatIT />
+          </div>
       <h1>APP TWO</h1>
           <div className="card">
               <button onClick={onclick}>
                   Call API {val}
-        </button>
+              </button>
+              <button>
+              Connect
+              </button>
+              <button>
+              Signal IT</button>
        
       </div>
       <p className="read-the-docs">
