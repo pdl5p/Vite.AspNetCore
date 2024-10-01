@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Mvc;
 using Vite.AspNetCore;
+using ViteNET.React.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddEndpointsApiExplorer();
 
 // Add the Vite services.
 builder.Services.AddViteServices(options =>
@@ -32,6 +35,23 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.UseMiddleware<CustomMiddleware>();
+
+app.MapGet("/api/one", () =>
+{
+    //return new OkResult();
+    return "HI";
+});
+
+
+app.MapGet("/api/context", (HttpContext httpContext) =>
+{
+    // Accessing Request and Response
+    var requestPath = httpContext.Request.Path;
+    var requestMethod = httpContext.Request.Method;
+
+    return $"Request Path: {requestPath}, Request Method: {requestMethod}";
+});
 
 if (app.Environment.IsDevelopment())
 {
