@@ -13,13 +13,31 @@ import { HubConnectionBuilder, HubConnection } from '@microsoft/signalr';
         this.connection.on('ReceiveMessage', (user: string, message: string) => {
             console.log(`${user}: ${message}`);
             // You can also update your component state or do more here
+            if (message === "DONE") {
+                this.onDone();
+            };
         });
         this.connection.on('Update', (_user: string, message: string) => {
             console.log(`UPDATE: ${message}`);
+            this.onUpdate(message);
             // You can also update your component state or do more here
         });
+     }
 
-    }
+     public done?: () => void;
+     public update?: (message: string) => void;
+
+     private onDone = () => {
+         if (this.done) {
+             this.done();
+         }
+     }
+
+     private onUpdate = (message: string) => {
+         if (this.update) {
+             this.update(message);
+         }
+     }
 
     public async startConnection(): Promise<void> {
         try {
@@ -44,9 +62,18 @@ const sigr = new SignalRService();
 const ChatComponent: React.FC = () => {
     const [user, setUser] = useState<string>('');
     const [message, setMessage] = useState<string>('');
+    const [status, setStatus] = useState<string>("");
 
     useEffect(() => {
         sigr.startConnection();
+
+        sigr.done = () => {
+            setStatus("DONE and DUSTED");
+        }
+
+        sigr.update = (message) => {
+            setStatus(message);
+        }
         console.log(`SIGR: connected`);
     }, []);
 
@@ -71,6 +98,7 @@ const ChatComponent: React.FC = () => {
                 onChange={e => setMessage(e.target.value)}
             />
             <button onClick={handleSendMessage}>Send</button>
+            <div>STATUS: {status}</div>
         </div>
     );
 };
