@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ChatIT from './SigIT';
+import { f3 } from './funcy';
 
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -22,6 +23,7 @@ function App() {
     const [val,setVal] = useState("");
 
     const onclick = async () => {
+        f3.run();
         var t = await callApi();
         setVal(t);
     }

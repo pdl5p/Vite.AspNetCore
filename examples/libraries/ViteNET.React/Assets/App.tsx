@@ -1,15 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import dotnetLogo from "./assets/dotnet.svg";
 import typescriptLogo from "./assets/typescript.svg";
+import f1, { f2 } from './funcy';
+import SigIT from './SigIT';
+
 import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
 
+    useEffect(() => {
+        f1();
+        console.log(f2());
+        //f3.run();
+    }, []);
+
   return (
-    <>
+      <>
+          <div>
+              <SigIT />
+          </div>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />

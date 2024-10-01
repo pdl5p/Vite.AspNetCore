@@ -1,63 +1,5 @@
-﻿// ChatComponent.tsx
-import { useEffect, useState } from 'react';
-//import { sigr } from './SignalRService.js';
-import { HubConnectionBuilder, HubConnection } from '@microsoft/signalr';
- class SignalRService {
-    private connection: HubConnection;
-
-    constructor() {
-        this.connection = new HubConnectionBuilder()
-            .withUrl('/sigr') // Replace with your hub URL
-            .build();
-
-        this.connection.on('ReceiveMessage', (user: string, message: string) => {
-            console.log(`${user}: ${message}`);
-            // You can also update your component state or do more here
-            if (message === "DONE") {
-                this.onDone();
-            };
-        });
-        this.connection.on('Update', (_user: string, message: string) => {
-            console.log(`UPDATE: ${message}`);
-            this.onUpdate(message);
-            // You can also update your component state or do more here
-        });
-     }
-
-     public done?: () => void;
-     public update?: (message: string) => void;
-
-     private onDone = () => {
-         if (this.done) {
-             this.done();
-         }
-     }
-
-     private onUpdate = (message: string) => {
-         if (this.update) {
-             this.update(message);
-         }
-     }
-
-    public async startConnection(): Promise<void> {
-        try {
-            await this.connection.start();
-            console.log('SignalR connected');
-        } catch (error) {
-            console.error('Connection failed: ', error);
-        }
-    }
-
-    public async sendMessage(user: string, message: string): Promise<void> {
-        try {
-            await this.connection.invoke('SendMessage', user, message);
-        } catch (error) {
-            console.error('Send failed: ', error);
-        }
-    }
-}
-
-const sigr = new SignalRService();
+﻿import { useEffect, useState } from 'react';
+import { sigr } from './funcy';
 
 const ChatComponent: React.FC = () => {
     const [user, setUser] = useState<string>('');
@@ -65,7 +7,7 @@ const ChatComponent: React.FC = () => {
     const [status, setStatus] = useState<string>("");
 
     useEffect(() => {
-        sigr.startConnection();
+        //sigr.startConnection();
 
         sigr.done = () => {
             setStatus("DONE and DUSTED");
@@ -74,7 +16,9 @@ const ChatComponent: React.FC = () => {
         sigr.update = (message) => {
             setStatus(message);
         }
-        console.log(`SIGR: connected`);
+        setStatus("K");
+        //console.log(`SIGR: connected`);
+        //f3.run();
     }, []);
 
     const handleSendMessage = () => {
